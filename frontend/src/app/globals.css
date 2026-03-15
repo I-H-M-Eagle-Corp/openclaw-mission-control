@@ -3,26 +3,26 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
-  --bg: #fafaf9;
-  --surface: #ffffff;
-  --surface-muted: #f4f4f5;
-  --surface-strong: #e4e4e7;
-  --border: #d4d4d8;
-  --border-strong: #a1a1aa;
-  --text: #18181b;
-  --text-muted: #71717a;
-  --text-quiet: #a1a1aa;
-  --accent: #d97706;
-  --accent-strong: #b45309;
-  --accent-soft: rgba(217, 119, 6, 0.12);
-  --success: #16a34a;
-  --warning: #d97706;
-  --danger: #dc2626;
+  color-scheme: dark;
+  --bg: #09090b;
+  --surface: #18181b;
+  --surface-muted: #27272a;
+  --surface-strong: #3f3f46;
+  --border: #3f3f46;
+  --border-strong: #52525b;
+  --text: #fafaf9;
+  --text-muted: #a1a1aa;
+  --text-quiet: #71717a;
+  --accent: #f59e0b;
+  --accent-strong: #d97706;
+  --accent-soft: rgba(245, 158, 11, 0.15);
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
   --shadow-panel:
-    0 1px 3px rgba(24, 24, 27, 0.12), 0 1px 2px rgba(24, 24, 27, 0.08);
+    0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
   --shadow-card:
-    0 1px 2px rgba(24, 24, 27, 0.08), 0 2px 6px rgba(24, 24, 27, 0.06);
+    0 1px 2px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 body {
@@ -133,17 +133,17 @@ body {
 
 /* Landing (Enterprise) */
 .landing-enterprise {
-  --primary-navy: #18181b;
-  --secondary-navy: #27272a;
-  --accent-gold: #d97706;
-  --accent-amber: #f59e0b;
-  --neutral-100: #fafaf9;
-  --neutral-200: #e4e4e7;
-  --neutral-300: #d4d4d8;
-  --neutral-700: #52525b;
-  --neutral-800: #27272a;
-  --success: #16a34a;
-  --warning: #d97706;
+  --primary-navy: #09090b;
+  --secondary-navy: #18181b;
+  --accent-gold: #f59e0b;
+  --accent-amber: #fbbf24;
+  --neutral-100: #18181b;
+  --neutral-200: #27272a;
+  --neutral-300: #3f3f46;
+  --neutral-700: #a1a1aa;
+  --neutral-800: #e4e4e7;
+  --success: #22c55e;
+  --warning: #f59e0b;
 
   min-height: 100vh;
   font-family:

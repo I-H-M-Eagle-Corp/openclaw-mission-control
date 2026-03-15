@@ -150,7 +150,7 @@ export function LandingShell({ children }: { children: ReactNode }) {
 
         <div className="footer-bottom">
           <div className="footer-copyright">
-            © {new Date().getFullYear()} I.H.M. Eagle Corp. All rights reserved.
+            © 2026 I.H.M. Eagle Corp | Inlet, New York
           </div>
           <div className="footer-bottom-links">
             <Link href="#capabilities">Capabilities</Link>
