@@ -10,8 +10,13 @@ import { QueryProvider } from "@/components/providers/QueryProvider";
 import { GlobalLoader } from "@/components/ui/global-loader";
 
 export const metadata: Metadata = {
-  title: "OpenClaw Mission Control",
-  description: "A calm command center for every task.",
+  title: "Eagle Command",
+  description: "I.H.M. Eagle Corp AI Operations Center",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 const bodyFont = IBM_Plex_Sans({

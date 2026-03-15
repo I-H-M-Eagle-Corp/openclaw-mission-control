@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Eagle Command Logo - Dark Mode -->
+  <defs>
+    <linearGradient id="eagleGradientDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5f5f5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0e0e0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#f5f5f5" stroke-width="4"/>
+  
+  <!-- Eagle silhouette -->
+  <path d="M100 35 
+           C 85 35, 70 45, 65 60
+           C 60 55, 50 55, 45 65
+           C 40 75, 45 85, 55 90
+           C 50 100, 55 115, 65 120
+           C 60 130, 70 140, 80 135
+           C 85 145, 95 150, 100 150
+           C 105 150, 115 145, 120 135
+           C 130 140, 140 130, 135 120
+           C 145 115, 150 100, 145 90
+           C 155 85, 160 75, 155 65
+           C 150 55, 140 55, 135 60
+           C 130 45, 115 35, 100 35 Z
+           M 100 55
+           C 105 55, 110 60, 110 70
+           C 110 80, 105 85, 100 85
+           C 95 85, 90 80, 90 70
+           C 90 60, 95 55, 100 55 Z
+           M 75 75
+           C 80 75, 85 80, 85 90
+           C 85 100, 80 105, 75 105
+           C 70 105, 65 100, 65 90
+           C 65 80, 70 75, 75 75 Z
+           M 125 75
+           C 130 75, 135 80, 135 90
+           C 135 100, 130 105, 125 105
+           C 120 105, 115 100, 115 90
+           C 115 80, 120 75, 125 75 Z"
+        fill="url(#eagleGradientDark)"
+        stroke="none"/>
+  
+  <!-- Command symbol -->
+  <circle cx="100" cy="100" r="25" fill="none" stroke="#f5f5f5" stroke-width="3"/>
+  <path d="M 100 85 L 100 100 L 115 100" fill="none" stroke="#f5f5f5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Text -->
+  <text x="100" y="175" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#f5f5f5">EAGLE COMMAND</text>
+</svg>
