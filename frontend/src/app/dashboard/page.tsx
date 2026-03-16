@@ -21,6 +21,7 @@ import {
 import { DashboardSidebar } from "@/components/organisms/DashboardSidebar";
 import { DashboardShell } from "@/components/templates/DashboardShell";
 import { Markdown } from "@/components/atoms/Markdown";
+import { WeatherWidget } from "@/components/widgets/WeatherWidget";
 import { SignedOutPanel } from "@/components/auth/SignedOutPanel";
 import { ApiError } from "@/api/mutator";
 import {
@@ -941,6 +942,7 @@ export default function DashboardPage() {
             </div>
 
             <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-3">
+              <WeatherWidget />
               <InfoBlock
                 title="Workload"
                 rows={workloadRows}

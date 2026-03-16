@@ -10,3 +10,4 @@ class AuthMode(str, Enum):
 
     CLERK = "clerk"
     LOCAL = "local"
+    SESSION_KEY = "session_key"

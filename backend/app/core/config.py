@@ -39,9 +39,12 @@ class Settings(BaseSettings):
     environment: str = "dev"
     database_url: str = "postgresql+psycopg://postgres:postgres@localhost:5432/openclaw_agency"
 
-    # Auth mode: "clerk" for Clerk JWT auth, "local" for shared bearer token auth.
+    # Auth mode: "clerk" for Clerk JWT auth, "local" for shared bearer token auth, "session_key" for simple token auth.
     auth_mode: AuthMode
     local_auth_token: str = ""
+
+    # Session key auth (simple header-based auth for I.H.M. Eagle Corp)
+    session_key: str = ""
 
     # Clerk auth (auth only; roles stored in DB)
     clerk_secret_key: str = ""

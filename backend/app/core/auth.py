@@ -447,6 +447,78 @@ async def _resolve_local_auth_context(
     return AuthContext(actor_type="user", user=user)
 
 
+# Session key auth for I.H.M. Eagle Corp (simplified single-user auth)
+SESSION_KEY_USER_ID = "session-key-user"
+SESSION_KEY_EMAIL = "admin@eagle-wireless.net"
+SESSION_KEY_NAME = "Eagle Admin"
+
+
+async def _get_or_create_session_user(session: AsyncSession) -> User:
+    defaults: dict[str, object] = {
+        "email": SESSION_KEY_EMAIL,
+        "name": SESSION_KEY_NAME,
+    }
+    user, _created = await crud.get_or_create(
+        session,
+        User,
+        clerk_user_id=SESSION_KEY_USER_ID,
+        defaults=defaults,
+    )
+    changed = False
+    if not user.email:
+        user.email = SESSION_KEY_EMAIL
+        changed = True
+    if not user.name:
+        user.name = SESSION_KEY_NAME
+        changed = True
+    if changed:
+        session.add(user)
+        await session.commit()
+        await session.refresh(user)
+
+    from app.services.organizations import ensure_member_for_user
+
+    await ensure_member_for_user(session, user)
+    return user
+
+
+async def _resolve_session_key_auth_context(
+    *,
+    request: Request,
+    session: AsyncSession,
+    required: bool,
+) -> AuthContext | None:
+    """Session key auth for I.H.M. Eagle Corp.
+    
+    Checks X-Session-Key header or Authorization: Bearer <token>
+    """
+    # Check X-Session-Key header first
+    token = request.headers.get("X-Session-Key", "").strip()
+    
+    # Fall back to Authorization header
+    if not token:
+        token = _extract_bearer_token(request.headers.get("Authorization"))
+    
+    if not token:
+        if required:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Missing session key")
+        return None
+    
+    expected = settings.session_key.strip()
+    if not expected:
+        if required:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Session key not configured")
+        return None
+    
+    if not compare_digest(token, expected):
+        if required:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid session key")
+        return None
+    
+    user = await _get_or_create_session_user(session)
+    return AuthContext(actor_type="user", user=user)
+
+
 def _parse_subject(claims: dict[str, object]) -> str | None:
     payload = ClerkTokenPayload.model_validate(claims)
     return payload.sub
@@ -467,6 +539,16 @@ async def get_auth_context(
         if local_auth is None:  # pragma: no cover
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
         return local_auth
+    
+    if settings.auth_mode == AuthMode.SESSION_KEY:
+        session_auth = await _resolve_session_key_auth_context(
+            request=request,
+            session=session,
+            required=True,
+        )
+        if session_auth is None:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+        return session_auth
 
     request_state = await _authenticate_clerk_request(request)
     if request_state.status != AuthStatus.SIGNED_IN or not isinstance(request_state.payload, dict):
@@ -504,6 +586,13 @@ async def get_auth_context_optional(
         return None
     if settings.auth_mode == AuthMode.LOCAL:
         return await _resolve_local_auth_context(
+            request=request,
+            session=session,
+            required=False,
+        )
+    
+    if settings.auth_mode == AuthMode.SESSION_KEY:
+        return await _resolve_session_key_auth_context(
             request=request,
             session=session,
             required=False,
